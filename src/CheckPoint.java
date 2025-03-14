@@ -1,15 +1,14 @@
 import java.util.ArrayList;
 
-public class Point {
+public class CheckPoint {
     int xValue;
     int yValue;
-    boolean allChecked;
     ArrayList<String> directions = new ArrayList<String>();
+    ArrayList<String> directionsChecked = new ArrayList<>();
 
-    public Point(String[][] maze, int xValue, int yValue) {
+    public CheckPoint(String[][] maze, int xValue, int yValue) {
         this.xValue = xValue;
         this.yValue = yValue;
-        allChecked = false;
         directions = MazeUtility.checkDirections(maze, xValue, yValue);
     }
 

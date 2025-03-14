@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class MazeUtility {
+
     public static String[][] getMaze(String fileName) {
         File f = new File(fileName);
         Scanner s = null;
@@ -46,20 +47,26 @@ public class MazeUtility {
 
     public static ArrayList<String> checkDirections(String[][] maze, int x, int y) {
         ArrayList<String> directions = new ArrayList<>();
-        if (y > 0 && maze[x][y - 1].equals(".")) {
+        if (y > 0 && maze[y - 1][x].equals(".")) {
             directions.add("N");
         }
-        if (y < maze.length - 1 && maze[x][y + 1].equals(".")) {
+        if (y < maze.length - 1 && maze[y + 1][x].equals(".")) {
             directions.add("S");
         }
-        if (x < maze[0].length - 1 && maze[x + 1][y].equals(".")) {
+        if (x < maze[0].length - 1 && maze[y][x + 1].equals(".")) {
             directions.add("W");
         }
-        if (x > 0 && maze[x - 1][y].equals(".")) {
+        if (x > 0 && maze[y][x - 1].equals(".")) {
             directions.add("E");
         }
         return directions;
 
+    }
+    public static boolean isPoint(String[][] maze, int x, int y) {
+        if (maze[y][x].equals(".")) {
+            return true;
+        }
+        return false;
     }
 
 
