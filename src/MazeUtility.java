@@ -54,19 +54,13 @@ public class MazeUtility {
             directions.add("S");
         }
         if (x < maze[0].length - 1 && maze[y][x + 1].equals(".")) {
-            directions.add("W");
+            directions.add("E");
         }
         if (x > 0 && maze[y][x - 1].equals(".")) {
-            directions.add("E");
+            directions.add("W");
         }
         return directions;
 
-    }
-    public static boolean isPoint(String[][] maze, int x, int y) {
-        if (maze[y][x].equals(".")) {
-            return true;
-        }
-        return false;
     }
 
 
