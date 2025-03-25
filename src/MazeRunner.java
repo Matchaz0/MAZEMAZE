@@ -14,13 +14,10 @@ public class MazeRunner {
 //
 //        }
         boolean running = maze.checkRunning();
-
-        int count = 0;
-        while (count < 15) {
+        while (running) {
             maze.move();
             running = maze.checkRunning();
             System.out.println(running);
-            count++;
             System.out.println(maze.intrustions);
         }
         System.out.println(maze.checkPoints);

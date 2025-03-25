@@ -50,7 +50,7 @@ public class Maze {
         }
 
         // Check deadends or endpoints
-        if (directions.get(0) == null) {
+        if (checkDeadEnd(directions)) {
             currentX = checkPoints.getLast().getxValue();
             currentY = checkPoints.getLast().getyValue();
         }
@@ -59,20 +59,20 @@ public class Maze {
     }
 
     public boolean checkRunning() {
-        return checkDeadEnd(); // if end point, then returns false and ends loop
+        return !checkEnd(); // if end point, then returns false and ends loop
     }
 
     public String[][] getMaze() {
         return maze;
     }
 
-    public boolean checkDeadEnd() {
-        ArrayList<String> directions = MazeUtility.checkDirections(maze, currentX, currentY);
-        directions.remove(previousDirection);
-        if (directions.isEmpty() && (currentX != maze[0].length - 1 || currentY != maze.length - 1)) {
-            return true; // dead end
-        }
-        return false; // end end
+    public boolean checkEnd() {
+        return currentX == maze[0].length - 1 && currentY == maze.length - 1; // return true if at the end
+    }
+
+    public boolean checkDeadEnd(ArrayList<String> directions) {
+        return (directions.contains(null) && !checkEnd()); // dead end if true
+
     }
 
     public ArrayList<CheckPoint> getCheckPoints() {
