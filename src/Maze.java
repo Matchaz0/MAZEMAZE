@@ -26,7 +26,25 @@ public class Maze {
         // Find checkpoints
         if (directions.size() > 1) {
             checkPoints.add(new CheckPoint(maze, currentX, currentY));
+            // now make sure the checkpoint remembers the path
+            checkPoints.getLast().addDirectionChecked(directions.get(0));
         }
+
+
+        // Make sure to update directions based on checkpoint
+        CheckPoint lastCheckPoint = null;
+        if (!checkPoints.isEmpty()) {
+            lastCheckPoint = checkPoints.getLast();
+        }
+        if (lastCheckPoint != null && currentX == lastCheckPoint.getxValue() && currentY == lastCheckPoint.getyValue()) {
+            for (String direction:lastCheckPoint.getDirectionsChecked()) {
+                if (directions.contains(direction)) {
+                    directions.remove(direction);
+                }
+            }
+        }
+
+
 
         // Edit location based on directions
         if (directions.isEmpty()) {
@@ -72,7 +90,6 @@ public class Maze {
 
     public boolean checkDeadEnd(ArrayList<String> directions) {
         return (directions.contains(null) && !checkEnd()); // dead end if true
-
     }
 
     public ArrayList<CheckPoint> getCheckPoints() {
