@@ -26,6 +26,60 @@ public class Maze {
         ArrayList<String> directions = MazeUtility.checkDirections(maze, currentX, currentY);
         directions.remove(previousDirection);
 
+
+        // Edit location based on directions
+        boolean deadEnd = !moveOne(directions); // if false then we have dead end
+
+
+//        // Check dead ends or endpoints
+//        if (deadEnd) {
+//            currentX = lastCheckPoint.getxValue();
+//            currentY = lastCheckPoint.getyValue();
+//        }
+
+
+    }
+
+    public void updateCheckpoints(ArrayList<String> directions, boolean deadEnd) {
+        //  Check if there is a checkpoint
+        CheckPoint lastCheckPoint = null;
+        if (!checkPoints.isEmpty()) {
+            lastCheckPoint = checkPoints.getLast();
+        }
+        if (lastCheckPoint != null && directions.isEmpty() && !checkEnd()) { // if dead end
+            checkPoints.remove(lastCheckPoint);
+            currentX = checkPoints.getLast().getxValue();
+            currentY = checkPoints.getLast().getyValue();
+            instructions = lastCheckPoint.instructions;
+
+            directions = MazeUtility.checkDirections(maze, currentX, currentY);
+            directions.remove(checkPoints.getLast().directionFrom);
+
+            for (CheckPoint checkpoint: checkPoints) {
+                System.out.println(checkpoint.yValue + " " + checkpoint.xValue);
+            }
+
+        }
+
+        // while returing
+        if (lastCheckPoint != null && currentX == lastCheckPoint.getxValue() && currentY == lastCheckPoint.getyValue()) {
+            for (String direction:lastCheckPoint.getDirectionsChecked()) {
+                if (directions.contains(direction)) {
+                    directions.remove(direction);
+                }
+            }
+            instructions = lastCheckPoint.getCurrentInstructions();
+            }
+            lastCheckPoint.addDirectionChecked(directions.get(0));
+
+            if (directions.size() > 0) {
+                lastCheckPoint.addDirectionChecked(directions.get(0));
+            }
+            else {
+                checkPoints.remove(lastCheckPoint);
+            }
+
+        // add new checkpoint
         if (directions.size() > 1) {
             boolean notPreviouslyDone = true;
             for (CheckPoint p : checkPoints) {
@@ -34,38 +88,13 @@ public class Maze {
                 }
             }
             if (notPreviouslyDone) {
-                checkPoints.add(new CheckPoint(maze, currentX, currentY, instructions));
+                checkPoints.add(new CheckPoint(maze, currentX, currentY, instructions, previousDirection));
             }
-            for (String direction : checkPoints.getLast().getDirectionsChecked()) {
-                directions.remove(direction);
-            }
-            checkPoints.getLast().addDirectionChecked(directions.get(0));
+//            for (String direction : checkPoints.getLast().getDirectionsChecked()) {
+//                directions.remove(direction);
+//            }
+//            checkPoints.getLast().addDirectionChecked(directions.get(0));
         }
-
-        CheckPoint lastCheckPoint = null;
-        if (!checkPoints.isEmpty()) {
-            lastCheckPoint = checkPoints.getLast();
-        }
-        if (lastCheckPoint != null && currentX == lastCheckPoint.getxValue() && currentY == lastCheckPoint.getyValue()) {
-            for (String direction:lastCheckPoint.getDirectionsChecked()) {
-                if (directions.contains(direction)) {
-                    directions.remove(direction);
-                }
-            }
-        }
-
-
-        // Edit location based on directions
-        boolean deadEnd = !moveOne(directions); // if false then we have dead end
-
-
-//        // Check dead ends or endpoints
-        if (deadEnd) {
-            currentX = lastCheckPoint.getxValue();
-            currentY = lastCheckPoint.getyValue();
-            instructions = lastCheckPoint.instructions;
-        }
-
     }
 
     public boolean moveOne(ArrayList<String> directions) {

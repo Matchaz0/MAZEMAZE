@@ -6,12 +6,14 @@ public class CheckPoint {
     int yValue;
     ArrayList<String> directionsChecked;
     String instructions;
+    String directionFrom;
 
-    public CheckPoint(String[][] maze, int xValue, int yValue, String instructions) {
+    public CheckPoint(String[][] maze, int xValue, int yValue, String instructions, String directionFrom) {
         this.xValue = xValue;
         this.yValue = yValue;
         directionsChecked = new ArrayList<>();
         this.instructions = instructions;
+        this.directionFrom = directionFrom;
     }
 
     public int getxValue() {
