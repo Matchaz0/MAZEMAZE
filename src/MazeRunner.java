@@ -13,14 +13,23 @@ public class MazeRunner {
 //            }
 //
 //        }
-        boolean running = maze.checkRunning();
-        while (running) {
+
+        boolean running = !maze.checkEnd();
+        int count = 0;
+        while (running && count < 10) {
             maze.move();
-            running = maze.checkRunning();
+            running = !maze.checkEnd();
             System.out.println(running);
-            System.out.println(maze.intrustions);
+            System.out.println(maze.instructions);
+            count++;
         }
         System.out.println(maze.checkPoints);
+        for (CheckPoint c : maze.checkPoints) {
+            System.out.println("("+c.yValue+ "," + c.xValue+")");
+        }
+
+        System.out.println(maze.instructions + "(" + maze.currentY + ", " + maze.currentX + ")");
+
 
     }
 }

@@ -4,25 +4,27 @@ import java.util.ArrayList;
 public class CheckPoint {
     int xValue;
     int yValue;
-//    ArrayList<String> directions;
     ArrayList<String> directionsChecked;
+    String instructions;
 
-    public CheckPoint(String[][] maze, int xValue, int yValue) {
+    public CheckPoint(String[][] maze, int xValue, int yValue, String instructions) {
         this.xValue = xValue;
         this.yValue = yValue;
-//        directions = new ArrayList<String>(MazeUtility.checkDirections(maze, xValue, yValue));
         directionsChecked = new ArrayList<>();
+        this.instructions = instructions;
     }
 
     public int getxValue() {
         return xValue;
     }
+
     public int getyValue() {
         return yValue;
     }
-//    public ArrayList<String> getDirections() {
-//        return directions;
-//    }
+
+    public String getCurrentInstructions() {
+        return instructions;
+    }
     public ArrayList<String> getDirectionsChecked() {
         return directionsChecked;
     }
