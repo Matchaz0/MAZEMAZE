@@ -8,7 +8,7 @@ public class MazeRunner {
 
         boolean running = !maze.checkEnd();
         int count = 0;
-        while (running) {
+        while (running && count <20) {
             maze.move();
             running = !maze.checkEnd();
             System.out.println(running);
@@ -23,7 +23,11 @@ public class MazeRunner {
         System.out.println(maze.instructions + "(" + maze.currentY + ", " + maze.currentX + ")");
 
 
+        for (CheckPoint checkpoint: maze.checkPoints) {
+            System.out.println(checkpoint.yValue + " " + checkpoint.xValue);
+        }
     }
+
 }
 //        // Check if returning
 //        CheckPoint lastCheckPoint = null;
