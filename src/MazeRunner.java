@@ -5,18 +5,10 @@ public class MazeRunner {
         ArrayList<String> instructions = new ArrayList<String>();
         Maze maze = new Maze("Data/MazeData");
         MazeUtility.printMaze(maze.getMaze());
-//        for (int i = 0; i < maze.length; i ++) {
-//            for (int j = 0; j < maze[0].length; j++) {
-//                if (MazeUtility.isPoint(maze, j, i)) {
-//                    System.out.println(MazeUtility.checkDirections(maze, j, i));
-//                }
-//            }
-//
-//        }
 
         boolean running = !maze.checkEnd();
         int count = 0;
-        while (running && count < 10) {
+        while (running && count < 20) {
             maze.move();
             running = !maze.checkEnd();
             System.out.println(running);
