@@ -7,19 +7,13 @@ public class MazeRunner {
         MazeUtility.printMaze(maze.getMaze());
 
         boolean running = !maze.checkEnd();
-        int count = 0;
-        while (running && count <40) {
+        while (running) {
             maze.move();
             running = !maze.checkEnd();
-            System.out.println(maze.instructions);
-            count++;
         }
         System.out.println(maze.instructions + "(" + maze.currentY + ", " + maze.currentX + ")");
 
 
-        for (CheckPoint checkpoint: maze.checkPoints) {
-            System.out.println(checkpoint.yValue + " " + checkpoint.xValue);
-        }
     }
 
 }
