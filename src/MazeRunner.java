@@ -13,6 +13,7 @@ public class MazeRunner {
             running = !maze.checkEnd();
             System.out.println(maze.instructions);
             count++;
+            MazeUtility.printMaze(maze.getMaze());
         }
         System.out.println(maze.instructions + "(" + maze.currentY + ", " + maze.currentX + ")");
 
