@@ -53,9 +53,8 @@ public class Maze {
                     directions.remove(direction);
                 }
                 checkPoints.getLast().addDirectionChecked(directions.getFirst());
-
-
             }
+
         }
 
         // check if checkpoint
